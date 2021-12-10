@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
     protected static WebDriver driver;
-    protected static WebDriverWait wait;
     private static final String WEBSITE_NAME = "http://automationpractice.com/index.php";
 
     @BeforeAll
@@ -19,7 +18,8 @@ public class TestBase {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.navigate().to(WEBSITE_NAME);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        driver.manage().deleteAllCookies();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     @AfterAll
