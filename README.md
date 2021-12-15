@@ -11,7 +11,7 @@
 
 ## General Info
 * Project was created for improvement my skills in automation tests.
-* Inside a created few pages of website and for them 21 test cases.
+* Inside I created few pages of website and for them 21 test cases.
 * Code was written with using Page Object Model and Page Factory.
 * By that project I learned more about using of Selenium WebDriver, jUnit 5 and Java.
 * There are obviously more test cases to do, but I have created sample tests for my practice.
