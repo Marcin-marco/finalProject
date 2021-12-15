@@ -33,6 +33,8 @@ public class LoginPage {
     private WebElement signOutButton;
     @FindBy(xpath = "//*[@id=\"center_column\"]//li")
     private WebElement authenticationAlert;
+    @FindBy(className = "page-heading")
+    private WebElement loginPageHeader;
 
 
 
@@ -74,6 +76,9 @@ public class LoginPage {
     }
     public boolean isDisplayedAuthenticationAlert() {
         return driver.findElement(By.className("alert-danger")).isDisplayed();
+    }
+    public String isAuthenticationTextDisplayed() {
+        return loginPageHeader.getText();
     }
 
 

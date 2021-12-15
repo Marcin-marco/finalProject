@@ -26,7 +26,7 @@ public class ContactUsPage {
     private WebElement submitButton;
     @FindBy(className = "alert-success")
     private WebElement informationAlertSuccess;
-    @FindBy(className = "alert-danger")
+    @FindBy(xpath = "//*[@id=\"center_column\"]//li")
     private WebElement informationAlertFail;
 
     public boolean isOnContactUsPage() {
@@ -44,17 +44,12 @@ public class ContactUsPage {
         submitButton.click();
     }
 
-
-    //    something is wrong with if else construction..
-    public String isMessageSend() {
+    public boolean isMessageSend() {
         if (informationAlertFail.isDisplayed()) {
-            return informationAlertFail.getText();
-        } else if (informationAlertSuccess.isDisplayed()) {
-            return informationAlertSuccess.getText();
+            return true;
         } else {
-            return null;
+            return informationAlertSuccess.isDisplayed();
         }
     }
-
 
 }

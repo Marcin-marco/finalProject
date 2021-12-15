@@ -13,7 +13,7 @@ public class SearchResultsPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(className = "product-listing")
+    @FindBy(className = "lighter")
     private WebElement searchResult;
     @FindBy(className = "heading-counter")
     private WebElement numberOfResultsText;

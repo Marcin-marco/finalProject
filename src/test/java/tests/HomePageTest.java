@@ -69,17 +69,18 @@ public class HomePageTest extends TestBase {
     }
 
     @Test
-    void shouldAddProductToCartProperly() throws InterruptedException {
+    void shouldAddProductToCartProperly() {
         homePage.clickOnSomeProduct();
         homePage.clickAddToCart();
         Assertions.assertTrue(homePage.isProductAddCorrect());
     }
 
     @Test
-    void shouldRemoveAddedProductProperly() throws InterruptedException {
+    void shouldRemoveAddedProductProperly() {
         homePage.clickOnSomeProduct();
         homePage.clickAddToCart();
         homePage.clickShoppingCartAndRemoveProduct();
+        homePage.clickShoppingCart();
         Assertions.assertEquals(SHOPPING_CART_TEXT, homePage.isShoppingCartEmpty());
     }
 

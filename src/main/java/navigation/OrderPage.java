@@ -1,12 +1,14 @@
 package navigation;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class OrderPage {
-    protected WebDriver driver;
+    WebDriver driver;
+
     private static final String EXISTING_USER_EMAIL = "NPniasdhuu@niepodam.pl";
     private static final String EXISTING_USER_PASSWORD = "Pass12!";
 
@@ -15,31 +17,59 @@ public class OrderPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(className = "button-medium")
-    private WebElement submitButton;
+    @FindBy(linkText = "Proceed to checkout")
+    private WebElement checkoutButton;
     @FindBy(className = "cart_quantity_delete")
     private WebElement deleteButton;
     @FindBy(xpath = "//*[@id=\"cart_title\"]/text()")
     private WebElement cartTitle;
-    @FindBy(id = "id_address_delivery")
-    private WebElement deliveryAddress;
-    @FindBy(className = "delivery_option_logo")
-    private WebElement deliveryLogo;
     @FindBy(id = "cgv")
     private WebElement checkboxTermsButton;
-    @FindBy(className = "bankwire")
-    private WebElement payByBankWireButton;
+    @FindBy(className = "fancybox-error")
+    private WebElement deliveryAlert;
     @FindBy(className = "cheque")
     private WebElement payByBankCheckButton;
     @FindBy(className = "page-subheading")
     private WebElement choosePaymentTitle;
-    @FindBy(className = "alert-success")
-    private WebElement successAlert;
+    @FindBy(className = "page-heading")
+    private WebElement informationAboutOrder;
+    @FindBy(css = "#cart_navigation > button")
+    private WebElement confirmOrderButton;
+    @FindBy(name = "processAddress")
+    private WebElement confirmAddressButton;
+    @FindBy(name = "processCarrier")
+    private WebElement confirmShippingButton;
 
-    public void clickSubmitButton() {
-        submitButton.click();
+
+    public void jsExecutor() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,800)");
     }
-    public void clickDeleteButton() {
-        deleteButton.click();
+    public void clickCheckoutButton() {
+        jsExecutor();
+        checkoutButton.click();
+    }
+    public void clickConfirmAddressButton() {
+        jsExecutor();
+        confirmAddressButton.click();
+    }
+    public void clickConfirmShippingButton() {
+        jsExecutor();
+        confirmShippingButton.click();
+    }
+    public void clickCheckboxTermsButtonAndSubmit() {
+        checkboxTermsButton.click();
+        clickConfirmShippingButton();
+    }
+    public void clickPayByBankButtonAndConfirmOrder() {
+        payByBankCheckButton.click();
+        jsExecutor();
+        confirmOrderButton.click();
+    }
+    public boolean isDeliveryAlertOnOrderPage() {
+        return deliveryAlert.isDisplayed();
+    }
+    public String isOrderComplete() {
+        return informationAboutOrder.getText();
     }
 }

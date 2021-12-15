@@ -8,11 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
 public class HomePage {
     WebDriver driver;
+
     private WebDriverWait wait;
 
     public HomePage(WebDriver driver) {
@@ -28,6 +30,7 @@ public class HomePage {
     private WebElement contactUsButton;
     @FindBy(className = "login")
     private WebElement signInButton;
+    @FindBy(linkText = "Blouse")
     private WebElement someProductLink;
     @FindBy(className = "shopping_cart")
     private WebElement shoppingCart;
@@ -43,8 +46,12 @@ public class HomePage {
     private WebElement removeProductButton;
     @FindBy(className = "cross")
     private WebElement closeWindowButton;
-    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
+    @FindBy(xpath = "//*[@id=\"header\"]//div[3]/div/a")
     private WebElement shoppingCartLink;
+    @FindBy(className = "button-medium")
+    private WebElement checkOutButton;
+    @FindBy(xpath = "//*[@id=\"header\"]//div[3]//p[1]")
+    private WebElement noProductsInfo;
 
 
     public boolean isProductAddCorrect() {
@@ -93,20 +100,28 @@ public class HomePage {
         contactUsButton.click();
     }
 
-    public void clickShoppingCartAndRemoveProduct() throws InterruptedException {
-        closeWindowButton.click();
+    public void clickShoppingCartAndRemoveProduct() {
         Actions actions = new Actions(driver);
+        closeWindowButton.click();
         actions.moveToElement(shoppingCartLink).build().perform();
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(removeProductButton));
         removeProductButton.click();
-        Thread.sleep(8000);
+    }
+    public void clickShoppingCart() {
+        shoppingCartLink.click();
+    }
+    public void jsExecutor() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,400)");
     }
 
-    public void clickAddToCart() throws InterruptedException {
-        Thread.sleep(10000);
+    public void clickAddToCart() {
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(addToCartButton));
+        jsExecutor();
         addToCartButton.click();
-        Thread.sleep(10000);
+        wait.until(ExpectedConditions.visibilityOf(productAddInfo));
     }
     public String isShoppingCartEmpty() {
         return shoppingCart.getText();
