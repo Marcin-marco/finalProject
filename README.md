@@ -21,7 +21,7 @@
 * Selenium WebDriver - v.4.0.0
 * jUnit 5 jupiter - v.5.8.1
 
-##Setup
+## Setup
 You will need browser drivers to run the web application tests.
 To do this, download the latest stable version of  from
 [Chrome driver](https://chromedriver.chromium.org/downloads).
