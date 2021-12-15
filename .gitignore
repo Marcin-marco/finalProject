@@ -1,4 +1,2 @@
-# Ignored files
-.idea/
-target/
-
+**/.idea/
+**/target/
