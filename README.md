@@ -17,7 +17,8 @@
 * There are obviously more test cases to do, but I have created sample tests for my practice.
 
 ## Technologies Used
-* Java
+* Java - v.17.0.1
+* Maven - v.17.0.1
 * Selenium WebDriver - v.4.0.0
 * jUnit 5 jupiter - v.5.8.1
 
